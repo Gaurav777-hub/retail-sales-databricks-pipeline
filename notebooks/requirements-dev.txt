@@ -1,2 +1,2 @@
-pyspark>=4.2.*
+pyspark=4.2.*
 pytest>=7
