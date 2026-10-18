@@ -1,0 +1,26 @@
+bundle:
+  name: retail_sales_pipeline
+
+variables:
+  catalog:
+    description: Unity Catalog catalog for this environment
+    default: retail_sales_dev
+
+resources:
+  jobs:
+    retail_sales_daily:
+      name: job_retail_sales_daily_${bundle.target}
+      parameters:
+        - name: catalog
+          default: ${var.catalog}
+      tasks:
+        - task_key: check_contracts
+          notebook_task:
+            notebook_path: notebooks/tests/check_table_contracts.ipynb
+
+targets:
+  dev:
+    mode: development
+    default: true
+    workspace:
+      host: https://adb-7405605347442077.17.azuredatabricks.net/>
